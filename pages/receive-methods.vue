@@ -19,8 +19,8 @@
         <DestinationItem
           v-if="eraNetwork.l1Network"
           label="Official bridge"
-          :description="`Receive from your ${destinations.ethereum.label} account`"
-          :icon-url="destinations.ethereum.iconUrl"
+          :description="`Receive from your ${destinations.stratis.label} account`"
+          :icon-url="destinations.stratis.iconUrl"
           as="RouterLink"
           :to="{ name: 'bridge', query: $route.query }"
         />
