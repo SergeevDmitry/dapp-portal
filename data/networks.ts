@@ -1,4 +1,4 @@
-import { mainnet, sepolia } from "@wagmi/core/chains";
+import { stratis, auroria } from "@wagmi/core/chains";
 
 import Hyperchains from "@/hyperchains/config.json";
 
@@ -6,15 +6,8 @@ import type { Token } from "@/types";
 import type { Chain } from "@wagmi/core/chains";
 
 export const l1Networks = {
-  mainnet: {
-    ...mainnet,
-    name: "Ethereum",
-    network: "mainnet",
-  },
-  sepolia: {
-    ...sepolia,
-    name: "Ethereum Sepolia Testnet",
-  },
+  stratis,
+  auroria,
 } as const;
 export type L1Network = Chain;
 
@@ -63,39 +56,29 @@ export const dockerizedNode: ZkSyncNetwork = {
 };
 
 const publicChains: ZkSyncNetwork[] = [
+  // {
+  //   id: 324,
+  //   key: "mainnet",
+  //   name: "zkSync",
+  //   rpcUrl: "https://mainnet.era.zksync.io",
+  //   blockExplorerUrl: "https://era.zksync.network",
+  //   blockExplorerApi: "https://block-explorer-api.mainnet.zksync.io",
+  //   displaySettings: {
+  //     showPartnerLinks: true,
+  //   },
+  //   l1Network: l1Networks.stratis,
+  // },
   {
-    id: 324,
-    key: "mainnet",
-    name: "zkSync",
-    rpcUrl: "https://mainnet.era.zksync.io",
-    blockExplorerUrl: "https://era.zksync.network",
-    blockExplorerApi: "https://block-explorer-api.mainnet.zksync.io",
+    id: 206206,
+    key: "auroria",
+    name: "zkSync Auroria Testnet",
+    rpcUrl: "https://auroria.zksync.rpc.stratisevm.com",
+    blockExplorerUrl: "https://auroria.explorer.zksync.stratisevm.com",
+    blockExplorerApi: "https://auroria.explorer-api.zksync.stratisevm.com",
     displaySettings: {
       showPartnerLinks: true,
     },
-    l1Network: l1Networks.mainnet,
-  },
-  {
-    id: 300,
-    key: "sepolia",
-    name: "zkSync Sepolia Testnet",
-    rpcUrl: "https://sepolia.era.zksync.dev",
-    blockExplorerUrl: "https://sepolia-era.zksync.network",
-    blockExplorerApi: "https://block-explorer-api.sepolia.zksync.dev",
-    displaySettings: {
-      showPartnerLinks: true,
-    },
-    l1Network: l1Networks.sepolia,
-  },
-  {
-    id: 270,
-    key: "stage",
-    name: "zkSync Stage",
-    rpcUrl: "https://z2-dev-api.zksync.dev",
-    blockExplorerUrl: "https://sepolia-beta.staging-scan-v2.zksync.dev",
-    blockExplorerApi: "https://block-explorer-api.stage.zksync.dev",
-    l1Network: l1Networks.sepolia,
-    hidden: true,
+    l1Network: l1Networks.auroria,
   },
 ];
 
