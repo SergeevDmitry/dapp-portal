@@ -72,9 +72,9 @@ const publicChains: ZkSyncNetwork[] = [
     id: 206206,
     key: "auroria",
     name: "zkSync Auroria Testnet",
-    rpcUrl: "https://auroria.zksync.rpc.stratisevm.com",
-    blockExplorerUrl: "https://auroria.explorer.zksync.stratisevm.com",
-    blockExplorerApi: "https://auroria.explorer-api.zksync.stratisevm.com",
+    rpcUrl: "https://auroria.zksync.rpc.stratisplatform.com",
+    blockExplorerUrl: "https://auroria.explorer.zksync.stratisplatform.com",
+    blockExplorerApi: "https://auroria.explorer-api.zksync.stratisplatform.com",
     displaySettings: {
       showPartnerLinks: true,
     },

@@ -7,8 +7,8 @@ import { chainList, type ZkSyncNetwork } from "@/data/networks";
 const metadata = {
   name: "zkSync Portal",
   description: "zkSync Portal - view balances, transfer and bridge tokens",
-  url: "https://portal.zksync.stratisevm.com",
-  icons: ["https://portal.zksync.stratisevm.com/icon.png"],
+  url: "https://portal.zksync.stratisplatform.com",
+  icons: ["https://portal.zksync.stratisplatform.com/icon.png"],
 };
 
 if (!process.env.WALLET_CONNECT_PROJECT_ID) {
@@ -26,14 +26,14 @@ const zkSyncAuroria = {
   },
   rpcUrls: {
     default: {
-      http: ["https://auroria.zksync.rpc.stratisevm.com"],
-      webSocket: ["wss://auroria.zksync.rpc.stratisevm.com/ws"],
+      http: ["https://auroria.zksync.rpc.stratisplatform.com"],
+      webSocket: ["wss://auroria.zksync.rpc.stratisplatform.com/ws"],
     },
   },
   blockExplorers: {
     default: {
       name: "zkExplorer",
-      url: "https://auroria.explorer.zksync.stratisevm.com",
+      url: "https://auroria.explorer.zksync.stratisplatform.com",
     },
   },
 };
