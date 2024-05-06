@@ -36,11 +36,11 @@
     <form v-else @submit.prevent="">
       <template v-if="step === 'form'">
         <TransactionWithdrawalsAvailableForClaimAlert />
-        <EcosystemBlock
+        <!-- <EcosystemBlock
           v-if="eraNetwork.displaySettings?.showPartnerLinks && ecosystemBannerVisible"
           show-close-button
           class="mb-block-padding-1/2 sm:mb-block-gap"
-        />
+        /> -->
         <CommonInputTransactionAmount
           v-model="amount"
           v-model:error="amountError"
@@ -387,7 +387,7 @@ const { balance, balanceInProgress, balanceError } = storeToRefs(zkSyncEthereumB
 
 const toNetworkModalOpened = ref(false);
 const toNetworkSelected = (networkKey?: string) => {
-  if (destinations.value.ethereum.key === networkKey) {
+  if (destinations.value.stratis.key === networkKey) {
     router.replace({ name: "bridge-withdraw", query: route.query });
   }
 };
@@ -568,7 +568,7 @@ const transaction = computed<
     },
     from: {
       address: account.value.address!,
-      destination: destinations.value.ethereum,
+      destination: destinations.value.stratis,
     },
     to: {
       address: toAddress,
@@ -654,7 +654,10 @@ const {
   error: transactionError,
   commitTransaction,
 } = useTransaction(eraWalletStore.getL1Signer);
-const { recentlyBridged, ecosystemBannerVisible } = useEcosystemBanner();
+const {
+  recentlyBridged,
+  // ecosystemBannerVisible
+} = useEcosystemBanner();
 const { saveTransaction, waitForCompletion } = useZkSyncTransactionStatusStore();
 
 watch(step, (newStep) => {

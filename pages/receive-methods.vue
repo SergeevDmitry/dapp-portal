@@ -25,7 +25,7 @@
           :to="{ name: 'bridge', query: $route.query }"
         />
       </CommonCardWithLineButtons>
-      <CommonCardWithLineButtons v-if="isTestnet">
+      <!-- <CommonCardWithLineButtons v-if="isTestnet">
         <DestinationItem
           label="Faucet"
           description="Receive testnet funds"
@@ -35,7 +35,7 @@
           target="_blank"
           :icon="ArrowTopRightOnSquareIcon"
         />
-      </CommonCardWithLineButtons>
+      </CommonCardWithLineButtons> -->
       <CommonCardWithLineButtons v-if="isMainnet && eraNetwork.displaySettings?.showPartnerLinks">
         <DestinationItem
           label="Top-up with cash"
@@ -79,7 +79,7 @@ import { mainnet } from "viem/chains";
 const { destinations } = storeToRefs(useDestinationsStore());
 const { eraNetwork } = storeToRefs(useZkSyncProviderStore());
 const isMainnet = computed(() => eraNetwork.value.l1Network?.id === mainnet.id);
-const isTestnet = computed(() => eraNetwork.value.l1Network && eraNetwork.value.l1Network.id !== mainnet.id);
+// const isTestnet = computed(() => eraNetwork.value.l1Network && eraNetwork.value.l1Network.id !== mainnet.id);
 </script>
 
 <style lang="scss" scoped></style>
