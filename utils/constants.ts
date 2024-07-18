@@ -6,5 +6,5 @@ export const ETH_TOKEN: Token = {
   symbol: "STRAX",
   name: "Stratis",
   decimals: 18,
-  iconUrl: "/img/stratis.svg",
+  iconUrl: "/img/strax.svg",
 };

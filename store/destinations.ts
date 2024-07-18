@@ -52,7 +52,7 @@ export const useDestinationsStore = defineStore("destinations", () => {
     stratis: {
       key: "stratis",
       label: l1Network.value ? l1Network.value.name : "",
-      iconUrl: "/img/auroria.jpg",
+      iconUrl: "/img/stratis.svg",
     },
   }));
 
