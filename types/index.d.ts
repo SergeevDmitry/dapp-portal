@@ -124,21 +124,6 @@ export declare namespace Api {
 
 declare global {
   interface Window {
-    turnstile?: {
-      render: (
-        element: string | HTMLElement,
-        options: {
-          sitekey: string;
-          theme: "light" | "dark" | "auto";
-          language: string;
-          appearance: "always" | "execute" | "interaction-only";
-          callback: (response: string) => void;
-          "expired-callback": (response: string) => void;
-          "error-callback": (response: string) => void;
-        }
-      ) => string | undefined;
-      reset: (widgetId: string) => void;
-    };
     rudderanalytics?: {
       load: (key: string, url: string) => void;
       ready: (callback: () => void) => void;
@@ -146,16 +131,17 @@ declare global {
       track: (eventName: string, params?: unknown) => void;
       initialized: boolean;
     };
-    MA?: {
-      MasaAnalytics: {
-        new ({ clientId });
-      };
-    };
-    masaAnalytics?: {
-      trackCustomEvent: ({ eventName, additionalEventData }) => void;
-      firePageViewEvent: ({ page, additionalEventData }) => void;
-      fireConnectWalletEvent: ({ user_address, wallet_type, additionalEventData }) => void;
-      initialized: boolean;
-    };
+    '##runtimeConfig'?: {
+      nodeType?: string;
+      walletConnectProjectId?: string;
+      ankrToken?: string;
+      screeningApiUrl?: string;
+      analytics?: {
+        rudder?: {
+          key: string;
+          dataplaneUrl: string;
+        }
+      }
+    }
   }
 }

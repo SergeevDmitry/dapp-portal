@@ -9,6 +9,12 @@
           Your funds will be available on <span class="font-medium">{{ transaction.to.destination.label }}</span> after
           you claim the withdrawal.
         </template>
+        <template v-else-if="isCustomNode">
+          Your funds will be available for claiming after the transaction is processed on
+          <span class="font-medium">{{ eraNetwork.name }}</span> and executed on the
+          <span class="font-medium">{{ eraNetwork.l1Network?.name }}</span
+          >.
+        </template>
         <template v-else>
           Your funds will be available on <span class="font-medium">{{ transaction.to.destination.label }}</span> after
           the <a class="underline underline-offset-2" :href="ZKSYNC_WITHDRAWAL_DELAY" target="_blank">24-hour delay</a>.
@@ -28,6 +34,9 @@
           class="mb-4"
         >
           <p>You can claim your withdrawal now.</p>
+        </CommonAlert>
+        <CommonAlert v-else-if="isCustomBridgeToken" variant="warning" :icon="ExclamationTriangleIcon" class="mb-4">
+          <p>This withdrawal was made through a third-party bridge. Please use that bridge to claim your withdrawal.</p>
         </CommonAlert>
         <CommonAlert v-else variant="warning" :icon="ExclamationTriangleIcon" class="mb-4">
           <p>
@@ -51,7 +60,7 @@
       :failed="transaction.info.failed"
       :animation-state="withdrawalFinalizationAvailable ? 'stopped-in-the-end' : undefined"
       :expected-complete-timestamp="
-        withdrawalFinalizationAvailable ? undefined : transaction.info.expectedCompleteTimestamp
+        withdrawalFinalizationAvailable || isCustomBridgeToken ? undefined : transaction.info.expectedCompleteTimestamp
       "
     >
       <template v-if="withdrawalFinalizationAvailable" #to-button>
@@ -109,8 +118,10 @@
                     finalizeTransactionStatus === 'done' ||
                     transaction.info.toTransactionHash
                   "
+                  class="flex items-center gap-2"
                 >
-                  Claiming withdrawal...
+                  <span>Claiming withdrawal...</span>
+                  <CommonSpinner variant="text-color" class="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span v-else>Claim withdrawal</span>
               </transition>
@@ -144,7 +155,6 @@
 <script lang="ts" setup>
 import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
 
-import { isWithdrawalManualFinalizationRequired } from "@/composables/zksync/useTransaction";
 import useWithdrawalFinalization from "@/composables/zksync/useWithdrawalFinalization";
 import { isCustomNode } from "@/data/networks";
 
@@ -165,15 +175,16 @@ const { eraNetwork, blockExplorerUrl } = storeToRefs(useZkSyncProviderStore());
 const { l1BlockExplorerUrl } = storeToRefs(useNetworkStore());
 const { connectorName, isCorrectNetworkSet } = storeToRefs(onboardStore);
 
+const isCustomBridgeToken = computed(() => !props.transaction.token.l1Address);
 const withdrawalManualFinalizationRequired = computed(() => {
-  return (
-    !props.transaction.info.completed &&
-    (isCustomNode ||
-      isWithdrawalManualFinalizationRequired(props.transaction.token, eraNetwork.value.l1Network?.id || -1))
-  );
+  return !props.transaction.info.completed;
 });
 const withdrawalFinalizationAvailable = computed(() => {
-  return props.transaction.info.withdrawalFinalizationAvailable;
+  return (
+    !isCustomBridgeToken.value &&
+    withdrawalManualFinalizationRequired.value &&
+    props.transaction.info.withdrawalFinalizationAvailable
+  );
 });
 
 const {
